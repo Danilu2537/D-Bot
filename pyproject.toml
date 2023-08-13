@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "d-bot"
+version = "0.1.0"
+description = ""
+authors = ["danilu <danilu2537@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "d_bot" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^2.25.1"
+envparse = "^0.2.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+skip-string-normalization = true
+skip-magic-trailing-comma = true
+include = '\.pyi?$'
+exclude = '''
+/(
+  | \.git
+)/
+'''
+
+[tool.ruff]
+select = ["B", "E", "F"]
+ignore = []
+
+fixable = ["ALL"]
+unfixable = []
+exclude = [".git", ".ruff_cache"]
+
+line-length = 88
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+target-version = "py311"
+
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+line_length = 88
+combine_as_imports = true
+combine_star = true
+skip_glob = '''
+  .git,
+'''

@@ -24,16 +24,28 @@ def recognize(filename):
     return text
 
 
-@dp.message_handler(content_types=('voice',))
-async def get_voice(message: types.Message):
+def transformate_ogg_to_wav(path_ogg):
+    os.system(
+        'ffmpeg -i ' + path_ogg + '  ' + (path_wav := (path_ogg[:-4] + '.wav'))
+    )
+    return path_wav
+
+
+async def download_voice(message):
     await bot.download_file(
         (await message.voice.get_file()).file_path,
         path := f'{MEDIA_ROOT}/{message.chat.id}.ogg',
     )
-    os.system('ffmpeg -i ' + path + '  ' + (path_new := (path[:-4] + '.wav')))
-    text = recognize(path_new).lower()
-    os.remove(path)
-    os.remove(path_new)
+    return path
+
+
+@dp.message_handler(content_types=('voice',))
+async def get_voice(message: types.Message):
+    path_ogg = await download_voice(message)
+    path_wav = transformate_ogg_to_wav(path_ogg)
+    text = recognize(path_wav).lower()
+    os.remove(path_ogg)
+    os.remove(path_wav)
     for key, value in VOICE_COMPRASION.items():
         for word in text.split():
             if word in value:

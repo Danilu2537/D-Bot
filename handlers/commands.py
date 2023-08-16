@@ -4,9 +4,11 @@ from keyboards import main_keyboard, photo_keyboard, voice_keyboard
 from loader import dp
 from settings import (
     COMMANDS,
+    INTERESTS_MESSAGE,
     PHOTO_CALLBACK,
     PHOTO_PATH,
     REPO_URL,
+    START_MESSAGE,
     VOICE_CALLBACK,
     VOICE_PATH,
 )
@@ -14,18 +16,13 @@ from settings import (
 
 @dp.message_handler(commands=('start',))
 async def get_start_info(message: types.Message):
-    await message.answer(
-        text='Привет 🙃\n'
-        'Я Данила. Давай познакомимся! Выбери, '
-        'что бы ты хотел узнать?',
-        reply_markup=main_keyboard,
-    )
+    await message.answer(text=START_MESSAGE, reply_markup=main_keyboard)
 
 
 @dp.message_handler(commands=('interests',))
 @dp.message_handler(text=COMMANDS['interests'])
 async def get_interests(message: types.Message):
-    await message.answer('Мой главное увлечение битбоксить🤓\n')
+    await message.answer(INTERESTS_MESSAGE)
 
 
 @dp.message_handler(commands=('repo',))

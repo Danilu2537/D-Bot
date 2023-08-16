@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  bot:
+    build: .
+    env_file: .env
+    volumes:
+      - ./media:/opt/app/media
+      - ./bot.log:/opt/app/bot.log

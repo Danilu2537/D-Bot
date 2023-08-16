@@ -25,7 +25,7 @@ async def get_start_info(message: types.Message):
 @dp.message_handler(commands=('interests',))
 @dp.message_handler(text=COMMANDS['interests'])
 async def get_interests(message: types.Message):
-    pass
+    await message.answer('Мой главное увлечение битбоксить🤓\n')
 
 
 @dp.message_handler(commands=('repo',))

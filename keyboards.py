@@ -20,7 +20,7 @@ VOICE_BUTTONS = [
 main_keyboard = ReplyKeyboardMarkup(
     resize_keyboard=True, one_time_keyboard=True, row_width=1
 )
-voice_keyboard = InlineKeyboardMarkup()
+voice_keyboard = InlineKeyboardMarkup(row_width=1)
 photo_keyboard = InlineKeyboardMarkup()
 
 main_keyboard.add(*MAIN_BUTTONS)

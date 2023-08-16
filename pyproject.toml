@@ -10,6 +10,7 @@ packages = [{ include = "d_bot" }]
 python = "^3.10"
 aiogram = "^2.25.1"
 envparse = "^0.2.0"
+speechrecognition = "^3.10.0"
 
 
 [tool.poetry.group.dev.dependencies]

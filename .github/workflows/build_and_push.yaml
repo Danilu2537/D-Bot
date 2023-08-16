@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-    needs: ruff
     runs-on: ubuntu-latest
     steps:
       -

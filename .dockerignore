@@ -1,0 +1,10 @@
+**
+
+!handlers
+!media
+!app.py
+!keyboards.py
+!loader.py
+!settings.py
+!pyproject.toml
+!poetry.lock

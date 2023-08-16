@@ -1,0 +1,71 @@
+from aiogram import types
+
+from keyboards import main_keyboard, photo_keyboard, voice_keyboard
+from loader import dp
+from settings import (
+    COMMANDS,
+    INTERESTS_MESSAGE,
+    PHOTO_CALLBACK,
+    PHOTO_PATH,
+    REPO_URL,
+    START_MESSAGE,
+    VOICE_CALLBACK,
+    VOICE_PATH,
+)
+
+
+@dp.message_handler(commands=('start',))
+async def get_start_info(message: types.Message):
+    await message.answer(text=START_MESSAGE, reply_markup=main_keyboard)
+
+
+@dp.message_handler(commands=('interests',))
+@dp.message_handler(text=COMMANDS['interests'])
+async def get_interests(message: types.Message):
+    await message.answer(INTERESTS_MESSAGE)
+
+
+@dp.message_handler(commands=('repo',))
+@dp.message_handler(text=COMMANDS['repo'])
+async def get_repo(message: types.Message):
+    await message.answer(
+        f'Вот же тот самый [репозиторий]({REPO_URL}) 🤘', parse_mode='Markdown'
+    )
+
+
+@dp.message_handler(commands=('cancel',))
+@dp.message_handler(text=COMMANDS['cancel'])
+async def cancel(message: types.Message):
+    await message.answer('😢')
+
+
+@dp.message_handler(commands=('photos',))
+@dp.message_handler(text=COMMANDS['photos'])
+async def get_photos(message: types.Message):
+    await message.answer('Выберите фото 📸', reply_markup=photo_keyboard)
+
+
+@dp.message_handler(commands=('voices',))
+@dp.message_handler(text=COMMANDS['voices'])
+async def get_voices(message: types.Message):
+    await message.answer('Выберите тему 🎤🐇', reply_markup=voice_keyboard)
+
+
+@dp.callback_query_handler(lambda query: query.data in PHOTO_CALLBACK)
+async def get_photo(query: types.CallbackQuery):
+    await query.message.delete()
+    await query.message.answer_photo(
+        types.InputFile(PHOTO_PATH[query.data]),
+        caption=PHOTO_CALLBACK[query.data],
+        reply_markup=photo_keyboard,
+    )
+
+
+@dp.callback_query_handler(lambda query: query.data in VOICE_CALLBACK)
+async def get_voice(query: types.CallbackQuery):
+    await query.message.delete()
+    await query.message.answer_voice(
+        types.InputFile(VOICE_PATH[query.data]),
+        caption=VOICE_CALLBACK[query.data],
+        reply_markup=voice_keyboard,
+    )

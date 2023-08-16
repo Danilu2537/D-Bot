@@ -10,6 +10,7 @@ packages = [{ include = "d_bot" }]
 python = "^3.10"
 aiogram = "^2.25.1"
 envparse = "^0.2.0"
+speechrecognition = "^3.10.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -20,7 +21,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 88
+line-length = 79
 skip-string-normalization = true
 skip-magic-trailing-comma = true
 include = '\.pyi?$'
@@ -38,7 +39,7 @@ fixable = ["ALL"]
 unfixable = []
 exclude = [".git", ".ruff_cache"]
 
-line-length = 88
+line-length = 79
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 target-version = "py311"
 
@@ -46,7 +47,7 @@ target-version = "py311"
 [tool.isort]
 multi_line_output = 3
 include_trailing_comma = true
-line_length = 88
+line_length = 79
 combine_as_imports = true
 combine_star = true
 skip_glob = '''

@@ -4,10 +4,7 @@ from envparse import env
 
 BASE_DIR = Path(__file__).resolve().parent
 ENV_PATH = BASE_DIR.joinpath('.env')
-print(1)
-print(ENV_PATH)
 if ENV_PATH.is_file():
-    print(2, ENV_PATH)
     env.read_envfile(ENV_PATH)
 
 

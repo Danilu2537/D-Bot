@@ -1,8 +1,8 @@
 import logging
-import types
 
-from aiogram import Dispatcher, executor
+from aiogram import Dispatcher, executor, types
 
+import handlers  # noqa: F401
 import settings
 from loader import dp
 

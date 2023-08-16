@@ -7,12 +7,11 @@ ENV_PATH = BASE_DIR.joinpath('.env')
 if ENV_PATH.is_file():
     env.read_envfile(ENV_PATH)
 
-
+REPO_URL = 'https://github.com/Danilu2537/D-Bot'
 BOT_TOKEN = env.str('BOT_TOKEN')
 
 COMMANDS = {
     'photos': 'Мои фотографии 😎',
-    'about': 'Обо мне 🙃',
     'interests': 'Мое главное увлечение 🤓',
     'voices': 'Мои голосовые 🤩',
     'repo': 'Репозиторий этого бота 📚',

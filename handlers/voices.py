@@ -2,6 +2,7 @@ from aiogram import types
 
 from handlers.commands import get_interests, get_photos, get_repo, get_voices
 from handlers.recognizer import MessageRecognizer
+from loader import dp
 from settings import VOICE_COMPRASION
 
 message_recognizer: MessageRecognizer = MessageRecognizer()
@@ -14,6 +15,7 @@ func_comprasion: dict[str, callable] = {
 }
 
 
+@dp.message_handler(content_types=types.ContentTypes.VOICE)
 async def get_voice(message: types.Message) -> None:
     """
     Handle voice messages in the chat.
@@ -25,7 +27,7 @@ async def get_voice(message: types.Message) -> None:
         None
     """
     # Recognize the voice message
-    text: str = MessageRecognizer.recognize_voice(message)
+    text: str = await message_recognizer.recognize_voice(message)
 
     # Compare the recognized words with pre-defined values
     for key, value in VOICE_COMPRASION.items():

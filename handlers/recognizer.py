@@ -1,8 +1,9 @@
 import os
 
 import speech_recognition as sr
-from aiogram import bot, types
+from aiogram import types
 
+from loader import bot
 from settings import MEDIA_ROOT
 
 
@@ -38,7 +39,7 @@ class MessageRecognizer:
 
         return text
 
-    async def _download_voice(message: types.Message) -> str:
+    async def _download_voice(self, message: types.Message) -> str:
         """
         Downloads the voice file from the given message and
         returns the path where it is saved.

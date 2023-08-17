@@ -1,4 +1,5 @@
 import logging
+from typing import Dict
 
 from aiogram import Dispatcher, executor, types
 
@@ -8,18 +9,28 @@ from loader import dp
 
 
 async def on_startup(dispatcher: Dispatcher) -> None:
+    """
+    Set up logging and set bot commands on startup.
+
+    Args:
+        dispatcher: The aiogram Dispatcher object.
+
+    Returns:
+        None
+    """
     logging.basicConfig(
         level=logging.INFO,
         filename='bot.log',
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     )
     logging.info('Бот запущен')
-    await dp.bot.set_my_commands(
-        [
-            types.BotCommand(*key_value)
-            for key_value in settings.COMMANDS.items()
-        ]
-    )
+
+    commands: Dict[str, str] = settings.COMMANDS
+    bot_commands = [
+        types.BotCommand(command, description)
+        for command, description in commands.items()
+    ]
+    await dispatcher.bot.set_my_commands(bot_commands)
 
 
 if __name__ == '__main__':

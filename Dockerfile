@@ -1,11 +1,8 @@
-FROM python:3.11.4-slim
+FROM croncorp/python-ffmpeg:3.11.3-slim-bullseye
 
 ENV POETRY_VERSION=1.5.1
 
 RUN pip install "poetry==$POETRY_VERSION"
-
-RUN apt-get update \
-    && apt-get install -y ffmpeg
 
 WORKDIR /opt/app
 

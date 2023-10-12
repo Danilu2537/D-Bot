@@ -16,7 +16,6 @@ VOICE_BUTTONS = [
     InlineKeyboardButton(text=text, callback_data=callback)
     for callback, text in VOICE_CALLBACK.items()
 ]
-
 main_keyboard = ReplyKeyboardMarkup(
     resize_keyboard=True, one_time_keyboard=True, row_width=1
 )
